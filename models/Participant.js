@@ -1,26 +1,26 @@
 import mongoose, { Mongoose } from "mongoose";
 
-// Connect to MongoDB
-
 const participantSchema = new mongoose.Schema({
-    name: { 
-        type: String, 
-        required: true 
-    },
-    email: { 
-        type: String, 
-        required: true, 
-        unique: true 
-    },
-    modeParticipation: { 
-        type: String,
-        enum: ["individual", "group"],
-        required: false
-    },
-    eventRef: { 
-        type : mongoose.Types.ObjectId, 
-        ref : "Event"
-    }
+  name: {
+    type: String,
+    required: [true, "Le nom du participant est requis"],
+  },
+  email: {
+    type: String,
+    required: [true, "L'email du participant est requis"],
+    unique: true,
+    match: [/.+\@.+\..+/, "Veuillez entrer un email valide"],
+  },
+  modeParticipation: {
+    type: String,
+    enum: ["en ligne", "présentiel"],
+    required: true,
+  },
+  eventRef: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Event",
+    required: [true, "La référence de l'événement est requise"],
+  },
 });
 
 const ParticipantModel = mongoose.model("Participant", participantSchema);
