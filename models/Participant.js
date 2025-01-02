@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 const participantSchema = new mongoose.Schema({
   name: {
@@ -13,7 +13,7 @@ const participantSchema = new mongoose.Schema({
   },
   modeParticipation: {
     type: String,
-    enum: ["en ligne", "présentiel"],
+    enum: ["online", "in-Person"],
     required: true,
   },
   eventRef: {

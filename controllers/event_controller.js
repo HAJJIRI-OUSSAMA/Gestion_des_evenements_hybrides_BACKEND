@@ -9,7 +9,7 @@ import {
 export async function AllEvents(req, res) {
   try {
     const events = await getAllEvents();
-    res.json(events);
+    res.status(200).json(events);
   } catch (error) {
     console.error(error);
     res.status(500).send("Server Error");
@@ -27,9 +27,10 @@ export async function EventById(req, res) {
   }
 }
 
-export async function AddEvent(event) {
+export async function AddEvent(req, res) {
   try {
-    const response = await createEvent(API, event);
+    const event = await createEvent(req.body);
+    res.status(201).json(event); // Return the created event with a 201 status code
     console.log("Event added:", response); // Log the response to check the result
     return response;
   } catch (error) {

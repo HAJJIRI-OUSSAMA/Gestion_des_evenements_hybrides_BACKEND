@@ -12,16 +12,22 @@ const eventSchema = new mongoose.Schema({
   date: {
     type: Date,
     required: [true, "La date de l'événement est requise"],
+    validate: {
+      validator: function (value) {
+        return !isNaN(new Date(value).getTime());
+      },
+      message: (props) => `${props.value} is not a valid date!`,
+    },
   },
   mode: {
     type: String,
-    enum: ["en ligne", "présentiel"],
+    enum: ["online", "in-person"],
     required: [true, "Le mode de l'événement est requis"],
   },
   lien: {
     type: String,
     default: function () {
-      return this.mode === "présentiel" ? "" : null;
+      return this.mode === "In-Person" ? "" : null;
     },
   },
   listeParticipants: [

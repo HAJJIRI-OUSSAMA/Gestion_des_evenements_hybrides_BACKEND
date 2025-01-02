@@ -1,4 +1,4 @@
-import EventModel from "../models/event.js";
+import EventModel from "../models/Event.js";
 
 export async function getAllEvents() {
   return await EventModel.find();
