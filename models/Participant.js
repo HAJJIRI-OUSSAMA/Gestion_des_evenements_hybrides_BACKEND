@@ -8,8 +8,7 @@ const participantSchema = new mongoose.Schema({
   email: {
     type: String,
     required: [true, "L'email du participant est requis"],
-    unique: true,
-    match: [/.+\@.+\..+/, "Veuillez entrer un email valide"],
+    unique: false,
   },
   modeParticipation: {
     type: String,

@@ -3,7 +3,7 @@ import {
   deleteEvent,
   getAllEvents,
   getEventById,
-  updateEvent,
+  UpdEvent,
 } from "../services/event_Service.js";
 
 export async function AllEvents(req, res) {
@@ -41,7 +41,7 @@ export async function AddEvent(req, res) {
 
 export async function UpdateEvent(req, res) {
   try {
-    const updatedEvent = await updateEvent(req.params.id, req.body);
+    const updatedEvent = await UpdEvent(req.params.id, req.body);
     if (!updatedEvent)
       return res.status(404).json({ message: "Event not found" });
     res.json(updatedEvent);
